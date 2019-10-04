@@ -3,18 +3,29 @@ import socket
 sock = socket.socket()
 try:
 	sock.connect(('localhost', 9090))
-	print("Подключение прошло успешно, введите сообщение:")
+	print("Подключение прошло успешно, введите сообщение")
 	msg=""
 	msg=input()
-	sock.send(msg.encode())
+	print("отправка данных")
+	try:
+		msg=""
+		msg=input()
+		while msg!="stop":
+			sock.send(msg.encode())
+			data = sock.recv(1024)
+			print("данные отправлены")			
+			msg=input()
+			pass
+		 
+	except:
+		print("данные не отправлены")
 
+	sock.close()
 	data = sock.recv(1024)
 
 	print(data)
-
-	sock.close()
 except:
-	print("подключение не прошло")
+	print("подключение оборвалось")
 	sock.close()
 	
 
