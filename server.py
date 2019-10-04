@@ -9,7 +9,9 @@ logs=[]
 
 sock = socket.socket()
 
+
 sock.bind(('', 9090))
+
 print("***Сервер запущен***")
 logs.append(str(datetime.datetime.now())+" запущен сервер")
 
@@ -51,38 +53,3 @@ except:
 		f.write(i+'\n')
 f.close()
 conn.close()
-
-"""
-conn, addr = sock.accept()
-
-print ('соединение с:', addr)
-
-
-msg=' '
-counter=0
-
-while True:
-    data = conn.recv(1024)
-    if not data:
-        break
-    msg+=data.decode()
-    conn.send(data.upper())
-    print(msg)
-conn.close()
-"""
-
-"""	
-while counter!=10:
-	pass
-	while msg[-1]!=".":
-		data = conn.recv(1024)
-		if not data:
-			break 
-		
-		msg+=data.decode()
-		conn.send(data.upper())
-		print(msg)
-	counter+=1
-
-conn.close()
-"""
