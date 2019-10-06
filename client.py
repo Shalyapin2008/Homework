@@ -9,7 +9,7 @@ else:
 	pass
 
 print("***Введите порт или L для поключения к локальному серверу***")
-port=input()
+port=int(input())
 if port=="L":
 	port=9090
 else:
@@ -24,8 +24,7 @@ try:
 		msg=input()
 		while msg!="stop":
 			sock.send(msg.encode())
-			data = sock.recv(1024)
-			print("данные отправлены")			
+			data = sock.recv(1024)			
 			msg=input()
 		 
 	except:

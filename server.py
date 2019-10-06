@@ -2,15 +2,26 @@ import socket
 import datetime
 
 
-file = 'logs.txt'
+
 logs=[]
 
 
 
 sock = socket.socket()
 
-
-sock.bind(('', 9090))
+#цикл while отвечает за bind свободного порта
+a=0
+sckt=9090
+while  a!=1 and sckt<15000:
+	try:
+		sock.bind(('', sckt))
+		a+=1
+		print("***сервер зарезервировал порт N"+str(sckt))
+		logs.append(str(datetime.datetime.now())+" зарезервировван порт N")
+	except:
+		sckt+=1
+		print(sckt)
+	
 
 print("***Сервер запущен***")
 logs.append(str(datetime.datetime.now())+" запущен сервер")
@@ -25,7 +36,7 @@ while command!="stop":
 	sock.listen(1)
 	print("***Ожидание подключения***")
 	conn, addr = sock.accept()
-	logs.append(str(datetime.datetime.now())+"Установлено соединение с "+addr[0])
+	logs.append(str(datetime.datetime.now())+" Установлено соединение с "+addr[0])
 	print ('***Установлено соединение с:', addr,'***')
 
 	while True:
@@ -44,11 +55,11 @@ logs.append(str(datetime.datetime.now())+" сервер завершает ра�
 logs.append("---"*20)
 
 try:
-	f=open(file,'a')
+	f=open('logs.txt','a')
 	for i in logs:
 		f.write(i+'\n')
 except:
-	f=open(file,'w')
+	f=open('logs.txt','w')
 	for i in logs:
 		f.write(i+'\n')
 f.close()
